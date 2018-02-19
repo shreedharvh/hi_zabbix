@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'thor', '~> 0.19'
   s.add_dependency 'zabbixapi', '~> 3.0.0'
-  s.add_dependency 'nokogiri',  '~> 1.6.7'
+  s.add_dependency 'nokogiri',  '~> 1.8.1'
   # newer versions of the chef omnibus installer do not include readline. so for now require this
   s.add_dependency 'rb-readline'
   s.add_dependency 'unf'
