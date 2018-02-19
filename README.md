@@ -4,26 +4,6 @@ This gem is a helpful command line tool to query and perform some of the time co
 
 ## Installation
 
-```
-gem install hi-zabbix -s http://repo.release.cerner.corp/internal/rubygems/
-```
-
-If you have ChefDK installed:
-
-```
-chef gem install hi-zabbix -s http://repo.release.cerner.corp/internal/rubygems/
-```
-
-**The following are the Zabbix API URLs:**
-
-URL | Environment(s) | Domain(s)
---- | -------------- | ---------
-`http://cloudmonitoring.cerner.corp/zabbix/api_jsonrpc.php` | Dev | `northamerica.cerner.net`
-`https://etszabbixsandbox.cernerasp.com/zabbix/api_jsonrpc.php` | Sandbox, Stage sphere | `sandboxcerner.com`, `spherestage.net`
-`https://cloudmonitoring.cernerasp.com/zabbix/api_jsonrpc.php` | Production, Production US sphere | `cernerasp.com`, `cernersphere.net`
-`https://zabbix.cernuksphere.net/zabbix-api/api_jsonrpc.php` | UK Production sphere | `cernuksphere.net`
-
-**Note** - You need to be connected to the CERNERASP VPN to reach the sandbox/stage or production Zabbix api from your local workstation. The UK Zabbix api can only be reached from within the UK sphere network.
 
 ## Usage
 
@@ -172,4 +152,4 @@ Performs healthcheck on the nodes and posts the results on jira
 ```
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/SH042423/hi_zabbix.
+Bug reports and pull requests are welcome on GitHub at https://github.com/shreedharvh/hi_zabbix.
