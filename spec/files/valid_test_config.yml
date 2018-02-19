@@ -1,0 +1,30 @@
+---
+url: 'https://cloudmonitoring.devcerner.com/zabbix/api_jsonrpc.php'
+debug: 'true'
+jira_api_root:
+  jira3: 'https://jira3dev.cerner.com'
+jira_number: 'ETSDEV-3965'
+host:
+  host_name: 0ac511bc-9552-2220-d6db-94aa92eae13e2.myhost
+  ip: 192.167.11.22
+  dns: ''
+  port: 10050
+  proxy_hostid: 
+  hostgroup: Discovered hosts
+hostgroup:
+  name: Discovered hosts
+user:
+  alias: SH042423
+  passwd: Admin
+  name: Shree
+  surname: H
+  usrgrps: Zabbix administrators
+maintenance_ops:
+  description: Testing
+  duration: 86400
+  host: 0ac511bc-9552-2220-d6db-94aa92eae13e2.myhost
+  hostgroup: Discovered hosts
+  name: Test Maintenance Window
+health_check:
+  nodes: [ 10.190.158.133 ]
+  command: "whoami"

@@ -1,0 +1,8 @@
+require 'hi_zabbix'
+# Runs when gem is run from command line with arguments and options.
+
+# Will make the log file in the users' home directory, change this to log to a different location
+$FILE_LOG = HiZabbix.create_log(File.expand_path('~/HiZabbix_LOG.log'), Logger::DEBUG)
+$STD_LOG = HiZabbix.create_log(nil, Logger::INFO)
+
+HiZabbix::Commands.start(ARGV)

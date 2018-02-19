@@ -1,0 +1,7 @@
+issue_base_uri: http://jira3.cerner.corp/browse/ETSDEV
+versions:
+  - version: 0.1.0
+    release_date: 2017-08-18
+    release_url: http://jira3.cerner.corp/browse/ETSDEV
+    changes:
+      - {issue: ETSDEV-8374, type: Command line tool to query and perform some of the time consuming Zabbix operations. , author: SH042423}

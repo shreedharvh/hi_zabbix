@@ -1,0 +1,8 @@
+---
+url: 'http://127.0.0.1:18086/zabbix/api_jsonrpc.php'
+zbx_user: 'Admin'
+zbx_passwd: 'zabbix'
+http_user: 'Admin'
+conn_timeout:
+timeout: 900
+debug: 'true'

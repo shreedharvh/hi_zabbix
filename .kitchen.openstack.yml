@@ -1,0 +1,78 @@
+---
+driver:
+  name: openstack
+  user_data: userdata.yaml
+  # User specific OpenStack config
+  openstack_username: <%= ENV['OS_USERNAME'] %>
+  openstack_api_key: <%= ENV['OS_PASSWORD'] %>
+  openstack_project_name: <%= ENV['OS_PROJECT_NAME'] %>
+  key_name: <%= ENV['OS_KEYNAME'] %>
+  private_key_path: <%= ENV['OS_KEYPATH'] %>
+  # Other OpenStack config
+  floating_ip_pool: ext-net-corporate
+  openstack_auth_url: <%= %Q(#{ENV['OS_AUTH_URL']}/auth/tokens) %>
+  openstack_domain_name: <%= ENV['OS_USER_DOMAIN_NAME'] %>
+  network_ref: 15ba4a51-c668-4920-915e-c39c735ec92e
+  security_groups:
+    - Test_Security_Group
+    - Testing
+  disable_ssl_validation: true
+
+transport:
+  username: cloud-user
+  ssh_key: <%= ENV['OS_KEYPATH'] %>
+
+provisioner:
+  data_path: "."
+  name: chef_zero
+  require_chef_omnibus: '12.19.36'
+
+platforms:
+  - name: rhel72
+    driver:
+      server_name: test.vagrantup.com
+      image_ref: RHEL-7.2-x86_64-current-2016-11-28-211210
+      flavor_ref: m1.medium
+    transport:
+      name: sftp
+
+suites:
+- name: default
+  data_bags_path: 'test/integration/data_bags'
+  encrypted_data_bag_secret_key_path: 'test/integration/default/encrypted_data_bag_secret'
+  run_list: 
+  - 'recipe[ops_zabbix_server::zabbix_server]'
+  attributes:
+    yum:
+      zabbix:
+        repo_url: "http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/"
+      mariaDB:
+        repo_url: "http://yum.mariadb.org/5.5.45/rhel7-amd64/"
+      webtatic:
+        repo_url: "http://mirror.webtatic.com/yum/el7-archive/x86_64/mirrorlist/"
+    zabbix:
+      server_install: true
+      cluster: false
+      data_bag_secret_path : /tmp/kitchen/encrypted_data_bag_secret
+      server_primary: '127.0.0.1'
+      server:
+        version: '3.0.5'
+        conf:
+          DBUser: 'zabbix'
+          ListenIP: '127.0.0.1'
+          SourceIP: '127.0.0.1'
+      partition_database:
+        perform_partition: false
+      web:
+        fqdn: "test.vagrantup.com.novalocal"
+        listen_ipaddress: '127.0.0.1'
+    mysql:
+      volume_group:
+        name: 'vg00'
+        disk: '/dev/sda2'
+      conf:
+        mysqld:
+          innodb_buffer_pool_size: '10M'
+      logical_volume:
+        name: 'mysqllv'
+        percent_free: '50'

@@ -1,0 +1,60 @@
+---
+driver:
+  name: vagrant
+  vm_hostname: test.vagrantup.com
+
+provisioner:
+  data_path: "."
+
+driver_config:
+  require_chef_omnibus: "12.19.36"
+
+platforms:
+ - name: rhel72
+   driver:
+     box: rhel72-1.0.0.box
+     box_url: http://repo.release.cerner.corp/nexus/content/repositories/vagrant/com/cerner/vagrant/rhel72/1.0.0/rhel72-1.0.0.box
+     network:
+       - ['forwarded_port', {guest: 80, host: 18086}]
+       - ['private_network', {ip: '192.168.200.3'}]
+     synced_folders: 
+       - [ '.' , '/opt/hi_zabbix' ]
+suites:
+- name: default
+  data_bags_path: 'test/integration/data_bags'
+  encrypted_data_bag_secret_key_path: 'test/integration/default/encrypted_data_bag_secret'
+  run_list: 
+  - 'recipe[ops_zabbix_server::zabbix_server]'
+  attributes:
+    yum:
+      zabbix:
+        repo_url: "http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/"
+      mariaDB:
+        repo_url: "http://yum.mariadb.org/5.5.45/rhel7-amd64/"
+      webtatic:
+        repo_url: "http://mirror.webtatic.com/yum/el7-archive/x86_64/mirrorlist/"
+    zabbix:
+      server_install: true
+      cluster: false
+      data_bag_secret_path : /tmp/kitchen/encrypted_data_bag_secret
+      server_primary: '127.0.0.1'
+      server:
+        version: '3.0.5'
+        conf:
+          DBUser: 'zabbix'
+          ListenIP: '192.168.200.3'
+          SourceIP: '192.168.200.3'
+      partition_database:
+        perform_partition: false
+      web:
+        listen_ipaddress: '127.0.0.1'
+    mysql:
+      volume_group:
+        name: 'vg00'
+        disk: '/dev/sda2'
+      conf:
+        mysqld:
+          innodb_buffer_pool_size: '10M'
+      logical_volume:
+        name: 'mysqllv'
+        percent_free: '50'

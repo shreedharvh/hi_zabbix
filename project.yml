@@ -1,0 +1,18 @@
+name: hi_zabbix
+group_id: com.cerner.ets
+artifact_id: hi_zabbix
+doc: tomdoc
+github:
+  project_url: https://github.cerner.com/ETS/solr_config
+repository:
+  id: cerner-rubygems-internal
+  url: http://repo.release.cerner.corp/internal/rubygems/
+site_repository:
+  id: cerner-main-internal-site
+  url: http://repo.release.cerner.corp/internal/site/
+snapshot_repository:
+  id: cerner-rubygems-snapshot
+  url: http://repo.snapshot.cerner.corp/rubygems/
+snapshot_site_repository:
+  id: ets-snapshot-site
+  url: http://repo.snapshot.cerner.corp/nexus/content/repositories/ets-snapshot-site
